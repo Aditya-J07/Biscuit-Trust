@@ -3,7 +3,7 @@
 A short decision-based game about trust, risk, and rewards.  
 Will you share the biscuit with the bot — or keep it all to yourself?  
 
-Play it here: [**Itch.io Link**](https://your-itch-link-here)  
+Play it here: [**Itch.io Link**](https://prolly-adi.itch.io/biscuit-trust)  
 
 ---
 
