@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://4smln06t5tuf"]
+[gd_scene load_steps=18 format=3 uid="uid://4smln06t5tuf"]
 
 [ext_resource type="Script" uid="uid://bk85lpxj2wdpa" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://b56jprvx7dfoo" path="res://asset/sprite/sprite bg.png" id="1_yqjtg"]
@@ -10,6 +10,34 @@
 [ext_resource type="AudioStream" uid="uid://jd5a3wn125qq" path="res://asset/click.mp3" id="8_gee14"]
 [ext_resource type="AudioStream" uid="uid://823ia74nooq1" path="res://asset/lost.mp3" id="9_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://drvrdjiipof54" path="res://asset/win.mp3" id="10_vtaks"]
+[ext_resource type="AudioStream" uid="uid://ct4lgnkf4ika1" path="res://asset/transition.mp3" id="11_kvpfn"]
+
+[sub_resource type="Animation" id="Animation_gee14"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.537791, 0.537791)]
+}
 
 [sub_resource type="Animation" id="Animation_u5sy4"]
 resource_name = "rotate"
@@ -40,41 +68,77 @@ tracks/1/keys = {
 "values": [Vector2(0.537791, 0.537791), Vector2(0.63581, 0.63581), Vector2(0.537987, 0.537987)]
 }
 
-[sub_resource type="Animation" id="Animation_gee14"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.537791, 0.537791)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0tnpc"]
 _data = {
 &"RESET": SubResource("Animation_gee14"),
 &"rotate": SubResource("Animation_u5sy4")
 }
 
+[sub_resource type="Animation" id="Animation_kvpfn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.537791, 0.537791)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_vtaks"]
+resource_name = "transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.537791, 0.537791), Vector2(4.56961, 4.56961)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dinhu"]
+_data = {
+&"RESET": SubResource("Animation_kvpfn"),
+&"transition": SubResource("Animation_vtaks")
+}
+
 [node name="main" type="Node2D"]
 script = ExtResource("1_lbhrr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 327)
 
 [node name="Bot" type="Sprite2D" parent="."]
 position = Vector2(888, 314)
@@ -82,20 +146,6 @@ scale = Vector2(0.591346, 0.562925)
 texture = ExtResource("1_yqjtg")
 region_enabled = true
 region_rect = Rect2(1105.5, 288.125, 312.75, 441)
-
-[node name="Biscuit" type="Sprite2D" parent="."]
-position = Vector2(611, 329)
-scale = Vector2(0.537791, 0.537791)
-texture = ExtResource("1_yqjtg")
-offset = Vector2(4.65646, 5.2511)
-region_enabled = true
-region_rect = Rect2(592.5, 335.375, 355.5, 344.25)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Biscuit"]
-libraries = {
-&"": SubResource("AnimationLibrary_0tnpc")
-}
-autoplay = "rotate"
 
 [node name="SpriteBg" type="Sprite2D" parent="."]
 visible = false
@@ -126,15 +176,15 @@ region_enabled = true
 region_rect = Rect2(113, 287.75, 337.5, 450)
 
 [node name="playerscore" type="Label" parent="."]
-offset_left = 122.0
-offset_top = 430.0
-offset_right = 473.0
-offset_bottom = 549.0
+offset_left = 126.0
+offset_top = 427.0
+offset_right = 807.0
+offset_bottom = 546.0
 theme_override_colors/font_color = Color(0.25098, 0.235294, 0.113725, 1)
 theme_override_fonts/font = ExtResource("5_iywne")
 theme_override_font_sizes/font_size = 67
-text = "you: 1"
-horizontal_alignment = 1
+text = "you: 10  (keeps : 5)   "
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="botscore" type="Label" parent="."]
@@ -177,9 +227,6 @@ position = Vector2(298, 318)
 scale = Vector2(0.589765, 0.589765)
 texture = ExtResource("7_gee14")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 327)
-
 [node name="Click" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(578, 676)
 stream = ExtResource("8_gee14")
@@ -193,6 +240,39 @@ stream = ExtResource("9_0tnpc")
 [node name="Win" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(935, 653)
 stream = ExtResource("10_vtaks")
+
+[node name="Biscuit" type="Sprite2D" parent="."]
+position = Vector2(569, 290)
+scale = Vector2(0.537791, 0.537791)
+texture = ExtResource("1_yqjtg")
+offset = Vector2(4.65646, 5.2511)
+region_enabled = true
+region_rect = Rect2(592.5, 335.375, 355.5, 344.25)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Biscuit"]
+libraries = {
+&"": SubResource("AnimationLibrary_0tnpc")
+}
+autoplay = "rotate"
+
+[node name="scene" type="AnimationPlayer" parent="Biscuit"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_dinhu")
+}
+
+[node name="Transition" type="AudioStreamPlayer2D" parent="Biscuit"]
+position = Vector2(11.1567, 799.567)
+stream = ExtResource("11_kvpfn")
+volume_db = 24.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -73.0
+offset_top = -67.0
+offset_right = 1277.0
+offset_bottom = 717.0
+color = Color(0.231373, 0.211765, 0.109804, 0)
 
 [connection signal="pressed" from="keep" to="." method="_on_keep_pressed"]
 [connection signal="pressed" from="share" to="." method="_on_share_pressed"]
