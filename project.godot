@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Biscuit Trust"
+run/main_scene="uid://b8drr4eqhgl45"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(1, 0.94902, 0.768627, 1)
+boot_splash/image="uid://hkq802n8gdsu"
+config/icon="uid://hkq802n8gdsu"
+
+[autoload]
+
+Bgm="*res://scenes/bgm.tscn"
+
+[display]
+
+mouse_cursor/custom_image="uid://brkkcmk44dw4a"
+
+[file_customization]
+
+folder_colors={
+"res://asset/": "red"
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.996078, 0.956863, 0.862745, 1)
