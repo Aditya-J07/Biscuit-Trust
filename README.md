@@ -13,6 +13,8 @@ Play it here: [**Itch.io Link**](https://prolly-adi.itch.io/biscuit-trust)
 - Keeping gives you the whole biscuit — but risks breaking trust.  
 - The bot has its own **trust level** that changes depending on your choices.  
 - Your goal: manage trust and risk to survive as long as you can!  
+- But keep in mind you have limited!!
+- You can gain it by sharing
 
 ---
 
